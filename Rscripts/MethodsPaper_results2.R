@@ -114,8 +114,8 @@ numSeals$seasPeriod<-ifelse(as.numeric(numSeals$acDay)<16,"Early Nov","Late Nov"
 ordflm<-data.frame(acHour=sort(unique(numSeals$acHour)),ordvallm=c(4,5,6,7,8,9,10,11,1,2,3))
 numSeals<-merge(numSeals,ordflm,by="acHour",all.x=T)
 numSeals$acHour<-reorder(numSeals$acHour,numSeals$ordvallm)
-numSeals$scaledNumTags<-scale(numSeals$numTags)
-numSeals$scaledNumMaps<-scale(numSeals$numMaps)
+numSeals$scaledNumTags<-as.numeric(scale(numSeals$numTags))
+numSeals$scaledNumMaps<-as.numeric(scale(numSeals$numMaps))
 numSeals$detRate<-numSeals$estNumSeals/numSeals$jayCount
 mdl<-lm(detRate~scaledNumTags*scaledNumMaps+satId+acHour+seasPeriod+acYear,data=numSeals)
 mdlsum<-summary(mdl)
