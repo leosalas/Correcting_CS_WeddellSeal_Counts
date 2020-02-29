@@ -481,6 +481,6 @@ tagStats<-getTagStats(tags=tags,views=views,maps=maps,overlays=overlays,colinfo=
 ## Save all results in a single data file
 save(res_tagsOnlybyTag,
 		tagStats,compML_feat,compML_tag,
-		file="//prbo.org/Data/Home/Petaluma/lsalas/Documents/lsalas/Antarctica/SealsFromSpace/Data/colonyEstimates.RData")
+		file="//prbo.org/Data/Home/Petaluma/lsalas/Documents/lsalas/Antarctica/SealsFromSpace/Data/Erebus/colonyEstimates.RData")
 
 

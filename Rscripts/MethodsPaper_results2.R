@@ -223,8 +223,8 @@ layout(matrix(c(1,2,3,4),2,2))
 plot(mdlIsl) # FigureS3_Reference
 
 
-sumSealsI<-numSealsF;sumSealsI$predicted<-fitted(mdlIsl); sumSealsI$residuals<-residuals(mdlIsl)
-pF5B<-ggplot(data=sumSealsI,aes(x=detRate,y=predicted)) + geom_point(size=1.3) + 
+numSealsI<-numSealsF;numSealsI$predicted<-fitted(mdlIsl); numSealsI$residuals<-residuals(mdlIsl)
+pF5B<-ggplot(data=numSealsI,aes(x=detRate,y=predicted)) + geom_point(size=1.3) + 
 		geom_abline(intercept=0,slope=1,color="blue",size=1.2) + 
 		theme_bw() +
 		annotate("text", x = 0.65, y = 0.4, label = "B",size=5) +
@@ -235,7 +235,7 @@ jpeg(filename = "//prbo.org/Data/Home/Petaluma/lsalas/Documents/lsalas/Antarctic
 dev.off()
 
 ## Now we move to MethodsPaper_results3.R for the estimation of seal numbers using both these models
-save(numSeals,numSealsF,mdlCol,mdlIsl, file="//prbo.org/Data/Home/Petaluma/lsalas/Documents/lsalas/Antarctica/SealsFromSpace/MethodsPaper/finalModelsAndData.RData")
+save(numSeals,numSealsF,numSealsI,mdlCol,mdlIsl, file="//prbo.org/Data/Home/Petaluma/lsalas/Documents/lsalas/Antarctica/SealsFromSpace/MethodsPaper/finalModelsAndData.RData")
 
 
 
