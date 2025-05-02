@@ -52,6 +52,21 @@ pRegion<-ggplot(data=rdf,aes(x=groundCount,y=predCount)) +
 		geom_errorbar(aes(ymin=pcl,ymax=pcu)) +
 		labs(x="Ground count",y="Predicted abundance") + theme_bw() 
 
+##########################
+## Saving as Fig5 for PLoS One...
+pRegion<-ggplot(data=rdf,aes(x=groundCount,y=predCount)) + 
+		geom_abline(slope=1,intercept=1,linetype="dotted",color="black", size=1.3) +
+		geom_smooth(method="lm",formula=y~x-1,color="dark gray",se=F) + geom_point() +
+		geom_errorbar(aes(ymin=pcl,ymax=pcu)) +
+		labs(x="Ground count",y="Predicted abundance") + theme_bw() +
+		theme(axis.text=element_text(size=8),axis.title=element_text(size=10),strip.text=element_text(size=10))
+
+tiff(filename="//prbo.org/Data/Home/Petaluma/lsalas/Documents/lsalas/Antarctica/SealsFromSpace/MethodsPaper/Final/Revision/PLoS version/Figures/Fig5.tif",
+		units="in", width=2.9, height=2.9, res=600, compression="lzw")
+print(pRegion)
+dev.off()
+
+##########################################
 jpeg(filename = "//prbo.org/Data/Home/Petaluma/lsalas/Documents/lsalas/Antarctica/SealsFromSpace/MethodsPaper/FinalFigures/Figure6.jpg",width=900,height=900,res=300,quality=100)
 	print(pRegion)
 dev.off()

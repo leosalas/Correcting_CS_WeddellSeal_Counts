@@ -45,6 +45,24 @@ predIsland<-ggplot(data=islplotdf,aes(x=groundCount,y=meanPredCount)) +
 		annotate("text", x = 210, y = 250, label = "B",size=5)
 print(predIsland)
 
+##########################
+## Saving as Fig4 for PLoS One...
+pdI<-ggplot(data=islplotdf,aes(x=groundCount,y=meanPredCount)) +  
+		geom_abline(slope=1,intercept=1,linetype="dotted",color="black", size=1.3) +
+		geom_smooth(method="lm",formula=y~x-1,color="dark gray",se=F) + geom_point(aes(color=Colony)) +
+		geom_errorbar(aes(ymin=lowerPredCount,ymax=upperPredCount,color=Colony)) +
+		labs(x="Ground count",y="Predicted abundance",color="Location") + theme_bw() +
+		scale_y_continuous(breaks=c(0,50,100,150,200, 250)) +
+		annotate("text", x = 210, y = 250, label = "B",size=5) +
+		theme(axis.text=element_text(size=8),axis.title=element_text(size=10),strip.text=element_text(size=10))
+
+tiff(filename="//prbo.org/Data/Home/Petaluma/lsalas/Documents/lsalas/Antarctica/SealsFromSpace/MethodsPaper/Final/Revision/PLoS version/Figures/Fig4B.tif",
+		units="in", width=4.2, height=2.5, res=600, compression="lzw")
+print(pdI)
+dev.off()
+
+#######################
+
 jpeg(filename = "//prbo.org/Data/Home/Petaluma/lsalas/Documents/lsalas/Antarctica/SealsFromSpace/MethodsPaper/FinalFigures/Figure5B.jpg",width=1400,height=900,res=300,quality=100)
 	print(predIsland)
 dev.off()
@@ -104,6 +122,26 @@ predColony<-ggplot(data=locplotdf,aes(x=groundCount,y=meanPredCount)) +
 		labs(x="Ground count",y="Predicted abundance",color="Location") + theme_bw() +
 		annotate("text", x = 210, y = 200, label = "A",size=5)
 print(predColony)
+##########################
+## Saving as Fig4 for PLoS One...
+pdC<-ggplot(data=locplotdf,aes(x=groundCount,y=meanPredCount)) +  
+		geom_abline(slope=1,intercept=1,linetype="dotted",color="black", size=1.3) +
+		geom_smooth(method="lm",formula=y~x-1,color="dark gray",se=F) + geom_point(aes(color=Colony)) +
+		geom_errorbar(aes(ymin=lowerPredCount,ymax=upperPredCount,color=Colony)) +
+		labs(x="Ground count",y="Predicted abundance",color="Location") + theme_bw() +
+		scale_y_continuous(breaks=c(0,50,100,150,200, 250), limits=c(3,278)) +
+		annotate("text", x = 210, y = 200, label = "A",size=5) +
+		theme(axis.text=element_text(size=8),axis.title=element_text(size=10),strip.text=element_text(size=10))
+print(pdC)
+
+tiff(filename="//prbo.org/Data/Home/Petaluma/lsalas/Documents/lsalas/Antarctica/SealsFromSpace/MethodsPaper/Final/Revision/PLoS version/Figures/Fig4A.tif",
+		units="in", width=4.2, height=2.5, res=600, compression="lzw")
+print(pdC)
+dev.off()
+
+#######################
+
+
 jpeg(filename = "//prbo.org/Data/Home/Petaluma/lsalas/Documents/lsalas/Antarctica/SealsFromSpace/MethodsPaper/FinalFigures/Figure5A.jpg",width=1400,height=900,res=300,quality=100)
 	print(predColony)
 dev.off()

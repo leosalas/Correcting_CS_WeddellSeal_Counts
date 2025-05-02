@@ -134,6 +134,17 @@ p1<-ggplot(data=dat,aes(x=mlCount,y=crCount)) + geom_point(size=1.5,alpha=0.2) +
 		facet_wrap(~threshold,ncol=3) + theme_bw() + labs(x="Expert count",y="Crowd estimate") +
 		theme(axis.text=element_text(size=12),axis.title=element_text(size=14),strip.text=element_text(size=14))
 ## TO NOTE: even at threshold=0.95 there are maps that may have 15 or more seals and the crowd only counted <2. No visible reduction in over-counting or undercounting.
+## Saving as Fig2 for PLoS One...
+p1<-ggplot(data=dat,aes(x=mlCount,y=crCount)) + geom_point(size=1.5,alpha=0.2) + geom_abline(slope=1,intercept=0,color="black",size=1.2) +
+		geom_smooth(method="lm",formula="y~x",color="blue", se=FALSE) +
+		facet_wrap(~threshold,ncol=3) + theme_bw() + labs(x="Expert count",y="Crowd estimate") +
+		theme(axis.text=element_text(size=8),axis.title=element_text(size=10),strip.text=element_text(size=10))
+
+tiff(filename="//prbo.org/Data/Home/Petaluma/lsalas/Documents/lsalas/Antarctica/SealsFromSpace/MethodsPaper/Final/Revision/PLoS version/Figures/Fig2.tif",
+		units="in", width=5, height=3.8, res=600, compression="lzw")
+print(p1)
+dev.off()
+
 
 ################################################################################
 ## Question 2:
@@ -162,7 +173,7 @@ for(crt in crtvals){
 ## At threshold 0.8, the number of features tagged by the surveyors is 4.7 more than the number of seals in the map, on average.
 
 ## FOURTH RESULT
-pdfs_ml$thresholdLab<-paste("Crowdrank threshold =",ifelse(nchar(pdfs_ml$crankThreshold)==4,pdfs_ml$crankThreshold,paste0(pdfs_ml$crankThreshold,"0")))
+pdfs_ml$thresholdLab<-paste("Threshold =",ifelse(nchar(pdfs_ml$crankThreshold)==4,pdfs_ml$crankThreshold,paste0(pdfs_ml$crankThreshold,"0")))
 p2<-ggplot(data=subset(pdfs_ml,featuresShared==10 & crankThreshold>0.65),aes(x=countML,y=estSeals)) + 
 		geom_point(size=1.5,alpha=0.2) + geom_errorbar(aes(ymin=estSealslLower,ymax=estSealslUpper)) +
 		geom_abline(slope=1,intercept=0,color="black",size=1.2) +
@@ -171,6 +182,21 @@ p2<-ggplot(data=subset(pdfs_ml,featuresShared==10 & crankThreshold>0.65),aes(x=c
 		facet_wrap(~thresholdLab,ncol=3) +
 		theme_bw() + labs(x="Expert count",y="Crowd estimate") +
 		theme(axis.text=element_text(size=12),axis.title=element_text(size=14),strip.text=element_text(size=12))
+
+## Saving as Fig3 for PLoS One...
+p2<-ggplot(data=subset(pdfs_ml,featuresShared==10 & crankThreshold>0.65),aes(x=countML,y=estSeals)) + 
+		geom_point(size=1.5,alpha=0.2) + geom_errorbar(aes(ymin=estSealslLower,ymax=estSealslUpper)) +
+		geom_abline(slope=1,intercept=0,color="black",size=1.2) +
+		geom_smooth(method="lm",formula="y~x",color="blue", se=FALSE) +
+		scale_y_continuous(limits=c(-60,95),breaks=c(-60,-30,0,30,60,90)) +
+		facet_wrap(~thresholdLab,ncol=3) +
+		theme_bw() + labs(x="Expert count",y="Crowd estimate") +
+		theme(axis.text=element_text(size=8),axis.title=element_text(size=10),strip.text=element_text(size=10))
+
+tiff(filename="//prbo.org/Data/Home/Petaluma/lsalas/Documents/lsalas/Antarctica/SealsFromSpace/MethodsPaper/Final/Revision/PLoS version/Figures/Fig3.tif",
+		units="in", width=5, height=3.8, res=600, compression="lzw")
+print(p2)
+dev.off()
 
 
 ### Printing out
